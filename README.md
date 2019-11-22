@@ -1,24 +1,34 @@
 # HTTP Link Header
-[![npm](https://img.shields.io/npm/v/http-link-header.svg?style=flat-square)](https://npmjs.com/http-link-header)
-[![npm license](https://img.shields.io/npm/l/http-link-header.svg?style=flat-square)](https://npmjs.com/http-link-header)
-[![npm downloads](https://img.shields.io/npm/dm/http-link-header.svg?style=flat-square)](https://npmjs.com/http-link-header)
-[![build status](https://img.shields.io/travis/jhermsmeier/node-http-link-header.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-http-link-header)
 
-Parse & format HTTP link headers according to [RFC 8288]
+Parse & format HTTP link headers according to [RFC 8288].
+
+This library is a port of [node-http-link-header] to an ES6 module which can be imported directly into the Browser or into a Deno script.
+
+```html
+<script type="module">
+  import {Link} from 'https://raw.githubusercontent.com/matey-jack/http-link-header/master/lib/link.js';
+
+  // TODO: find a publicly available API that has paging and can be used without authorization
+  let url = "https://server.rest/some/paged/ressource/123";
+  while (url) {
+      const restResponse = await fetch(url, {headers});
+      const body = await jobsResponse.json());
+      // do something with 'body'
+      url = getNextLink(jobsResponse);
+  }
+
+  function getNextLink(response) {
+      const next = Link.parse(response.headers.get("link")).rel('next');
+      if (!next.length) return null;
+      return next[0].uri;
+  }
+</script>
+```
 
 [RFC 8288]: https://tools.ietf.org/html/rfc8288
-
-## Install via [npm](https://npmjs.com)
-
-```sh
-$ npm install --save http-link-header
-```
+[node-http-link-header]: https://github.com/jhermsmeier/node-http-link-header
 
 ## Usage
-
-```js
-var LinkHeader = require( 'http-link-header' )
-```
 
 ### Parsing a HTTP link header
 
