@@ -25,6 +25,8 @@ This library is a port of [node-http-link-header] to an ES6 module which can be 
 </script>
 ```
 
+If you need an NPM import, please use the upstream project. This project tracks all features and aims to provide just the EcmaScript module for Browsers and Deno. (Maybe in the future both can merge again.)
+
 [RFC 8288]: https://tools.ietf.org/html/rfc8288
 [node-http-link-header]: https://github.com/jhermsmeier/node-http-link-header
 
@@ -133,16 +135,12 @@ link.toString()
 > '<example.com>; rel=example; title="Example Website", <example-01.com>; rel=alternate; title="Alternate Example Domain"'
 ```
 
-## Speed
+## Development
 
-```
-$ npm run benchmark
-```
+Aiming to be compatible with upstream. Please merge all feature-PRs there, we then port them here.
 
-```
-# http-link-header .parse() ⨉ 1000000
-ok ~1.29 s (1 s + 289696759 ns)
+Development environment for this project is [Deno](https://deno.land/). Currently in progress of migrating all tests.
 
-# http-link-header #toString() ⨉ 1000000
-ok ~554 ms (0 s + 553782657 ns)
-```
+The following are working already:
+
+    deno test --allow-net test/index.js
